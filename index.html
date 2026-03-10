@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -48,6 +48,20 @@
       text-decoration: none;
     }
     .logo span { color: var(--accent); }
+    .nav-right { display: flex; align-items: center; gap: 1rem; }
+    .lang-toggle {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 0.4rem 0.9rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+      font-family: inherit;
+    }
+    .lang-toggle:hover { border-color: var(--accent); color: var(--text); }
     nav a.cta-btn {
       background: var(--accent);
       color: #fff;
@@ -176,83 +190,37 @@
       padding: 2rem;
       transition: border-color 0.2s, transform 0.2s;
     }
-    .card:hover {
-      border-color: var(--accent);
-      transform: translateY(-4px);
-    }
-    .card-icon {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-    .card h3 {
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin-bottom: 0.6rem;
-    }
-    .card p {
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
+    .card:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .card-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.6rem; }
+    .card p { color: var(--muted); font-size: 0.95rem; }
 
     /* HOW IT WORKS */
     .steps {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 2rem;
-      counter-reset: steps;
     }
-    .step {
-      position: relative;
-      padding-left: 1rem;
-    }
-    .step-num {
-      font-size: 3rem;
-      font-weight: 800;
-      color: rgba(108,99,255,0.2);
-      line-height: 1;
-      margin-bottom: 0.5rem;
-    }
-    .step h3 {
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 0.4rem;
-    }
-    .step p {
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
+    .step { position: relative; padding-left: 1rem; }
+    .step-num { font-size: 3rem; font-weight: 800; color: rgba(108,99,255,0.2); line-height: 1; margin-bottom: 0.5rem; }
+    .step h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .step p { color: var(--muted); font-size: 0.9rem; }
 
     /* CTA SECTION */
     .cta-section {
-      background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 24px;
       padding: 4rem 3rem;
       text-align: center;
       margin: 2rem auto;
       max-width: 1100px;
-      background:
-        radial-gradient(ellipse 60% 80% at 50% 100%, rgba(108,99,255,0.1) 0%, transparent 70%),
-        var(--surface);
+      background: radial-gradient(ellipse 60% 80% at 50% 100%, rgba(108,99,255,0.1) 0%, transparent 70%), var(--surface);
     }
-    .cta-section h2 {
-      font-size: clamp(1.8rem, 4vw, 2.4rem);
-      font-weight: 800;
-      letter-spacing: -1px;
-      margin-bottom: 1rem;
-    }
-    .cta-section p {
-      color: var(--muted);
-      margin-bottom: 2rem;
-      font-size: 1.05rem;
-    }
+    .cta-section h2 { font-size: clamp(1.8rem, 4vw, 2.4rem); font-weight: 800; letter-spacing: -1px; margin-bottom: 1rem; }
+    .cta-section p { color: var(--muted); margin-bottom: 2rem; font-size: 1.05rem; }
 
     /* CONTACT */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.5rem;
-    }
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
     .contact-item {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -271,21 +239,18 @@
     .contact-item strong { font-size: 0.95rem; }
 
     /* FOOTER */
-    footer {
-      border-top: 1px solid var(--border);
-      text-align: center;
-      padding: 2rem;
-      color: var(--muted);
-      font-size: 0.85rem;
-    }
+    footer { border-top: 1px solid var(--border); text-align: center; padding: 2rem; color: var(--muted); font-size: 0.85rem; }
     footer a { color: var(--accent); text-decoration: none; }
 
     /* DIVIDER */
-    .divider {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 0 2rem;
-    }
+    .divider { border: none; border-top: 1px solid var(--border); margin: 0 2rem; }
+
+    /* i18n hidden */
+    [data-en], [data-zh] { display: none; }
+    html[data-lang="en"] [data-en] { display: revert; }
+    html[data-lang="zh"] [data-zh] { display: revert; }
+    html[data-lang="en"] [data-en="inline"] { display: inline; }
+    html[data-lang="zh"] [data-zh="inline"] { display: inline; }
   </style>
 </head>
 <body>
@@ -293,17 +258,38 @@
   <!-- NAV -->
   <nav>
     <a href="#" class="logo">Tang<span>Tech</span></a>
-    <a href="#contact" class="cta-btn">Get Started</a>
+    <div class="nav-right">
+      <button class="lang-toggle" onclick="toggleLang()" id="langBtn">中文</button>
+      <a href="#contact" class="cta-btn">
+        <span data-en>Get Started</span>
+        <span data-zh>立即咨询</span>
+      </a>
+    </div>
   </nav>
 
   <!-- HERO -->
   <div class="hero">
-    <div class="badge">🚀 OpenClaw Setup Experts</div>
-    <h1>Your AI Personal Assistant,<br><span class="highlight">Set Up Right.</span></h1>
-    <p>TangTech gets OpenClaw running for you — fully configured, connected, and ready to work. No guesswork, no hassle.</p>
+    <div class="badge">
+      <span data-en>🚀 OpenClaw Setup Experts</span>
+      <span data-zh>🚀 OpenClaw 专业部署专家</span>
+    </div>
+    <h1>
+      <span data-en>Your AI Personal Assistant,<br><span class="highlight">Set Up Right.</span></span>
+      <span data-zh>你的 AI 个人助手，<br><span class="highlight">交给我们来搞定。</span></span>
+    </h1>
+    <p>
+      <span data-en>TangTech gets OpenClaw running for you — fully configured, connected, and ready to work. No guesswork, no hassle.</span>
+      <span data-zh>TangTech 为你完整部署 OpenClaw —— 配置、接入、调试一条龙，开箱即用，无需折腾。</span>
+    </p>
     <div class="hero-btns">
-      <a href="#contact" class="btn-primary">Start Your Setup</a>
-      <a href="#services" class="btn-secondary">See What We Do</a>
+      <a href="#contact" class="btn-primary">
+        <span data-en>Start Your Setup</span>
+        <span data-zh>开始部署</span>
+      </a>
+      <a href="#services" class="btn-secondary">
+        <span data-en>See What We Do</span>
+        <span data-zh>查看服务</span>
+      </a>
     </div>
   </div>
 
@@ -311,39 +297,47 @@
 
   <!-- SERVICES -->
   <section id="services">
-    <div class="section-label">Services</div>
-    <h2 class="section-title">Everything You Need to Get Running</h2>
-    <p class="section-sub">We handle the full OpenClaw setup so you can focus on what matters.</p>
+    <div class="section-label">
+      <span data-en>Services</span><span data-zh>服务项目</span>
+    </div>
+    <h2 class="section-title">
+      <span data-en>Everything You Need to Get Running</span>
+      <span data-zh>一站式部署，全程无忧</span>
+    </h2>
+    <p class="section-sub">
+      <span data-en>We handle the full OpenClaw setup so you can focus on what matters.</span>
+      <span data-zh>我们搞定所有技术细节，让你专注于真正重要的事。</span>
+    </p>
     <div class="services-grid">
       <div class="card">
         <div class="card-icon">⚙️</div>
-        <h3>Full OpenClaw Installation</h3>
-        <p>We install and configure OpenClaw on your machine — Mac, Windows, or Linux — from scratch.</p>
+        <h3><span data-en>Full OpenClaw Installation</span><span data-zh>OpenClaw 完整安装</span></h3>
+        <p><span data-en>We install and configure OpenClaw on your machine — Mac, Windows, or Linux — from scratch.</span><span data-zh>在你的设备上从零安装配置 OpenClaw，支持 Mac、Windows、Linux。</span></p>
       </div>
       <div class="card">
         <div class="card-icon">🔗</div>
-        <h3>Messaging Integrations</h3>
-        <p>Connect your AI assistant to Telegram, Signal, WhatsApp, Discord, and more. We handle all the webhook setup.</p>
+        <h3><span data-en>Messaging Integrations</span><span data-zh>消息平台接入</span></h3>
+        <p><span data-en>Connect your AI assistant to Telegram, Signal, WhatsApp, Discord, and more. We handle all the webhook setup.</span><span data-zh>接入 Telegram、微信、WhatsApp、Discord 等平台，Webhook 全程由我们配置。</span></p>
       </div>
       <div class="card">
         <div class="card-icon">🧠</div>
-        <h3>Skills & Customization</h3>
-        <p>Configure custom skills, personas, memory systems, and workflows tailored to your needs.</p>
+        <h3><span data-en>Skills & Customization</span><span data-zh>技能与个性化定制</span></h3>
+        <p><span data-en>Configure custom skills, personas, memory systems, and workflows tailored to your needs.</span><span data-zh>定制专属技能、AI 人格、记忆系统和自动化流程，完全按你的需求来。</span></p>
       </div>
       <div class="card">
         <div class="card-icon">🔒</div>
-        <h3>Security Hardening</h3>
-        <p>Firewall rules, SSH hardening, and security best practices for your OpenClaw deployment.</p>
+        <h3><span data-en>Security Hardening</span><span data-zh>安全加固</span></h3>
+        <p><span data-en>Firewall rules, SSH hardening, and security best practices for your OpenClaw deployment.</span><span data-zh>防火墙规则、SSH 加固、安全最佳实践，让你的 AI 助手跑得安全。</span></p>
       </div>
       <div class="card">
         <div class="card-icon">☁️</div>
-        <h3>Cloud & VPS Deployment</h3>
-        <p>Run OpenClaw 24/7 on a VPS or cloud server. We set it up, you just use it.</p>
+        <h3><span data-en>Cloud & VPS Deployment</span><span data-zh>云端 / VPS 部署</span></h3>
+        <p><span data-en>Run OpenClaw 24/7 on a VPS or cloud server. We set it up, you just use it.</span><span data-zh>在云服务器上 7×24 小时运行 OpenClaw，我们搭好，你直接用。</span></p>
       </div>
       <div class="card">
         <div class="card-icon">🛠️</div>
-        <h3>Ongoing Support</h3>
-        <p>Updates, troubleshooting, and improvements. We're here when you need us.</p>
+        <h3><span data-en>Ongoing Support</span><span data-zh>持续技术支持</span></h3>
+        <p><span data-en>Updates, troubleshooting, and improvements. We're here when you need us.</span><span data-zh>升级、故障排查、功能改进，需要我们的时候随时找我们。</span></p>
       </div>
     </div>
   </section>
@@ -352,51 +346,74 @@
 
   <!-- HOW IT WORKS -->
   <section id="how">
-    <div class="section-label">Process</div>
-    <h2 class="section-title">How It Works</h2>
-    <p class="section-sub">Simple, fast, and done right the first time.</p>
+    <div class="section-label">
+      <span data-en>Process</span><span data-zh>服务流程</span>
+    </div>
+    <h2 class="section-title">
+      <span data-en>How It Works</span><span data-zh>怎么开始</span>
+    </h2>
+    <p class="section-sub">
+      <span data-en>Simple, fast, and done right the first time.</span>
+      <span data-zh>简单、快速，一次搞定。</span>
+    </p>
     <div class="steps">
       <div class="step">
         <div class="step-num">01</div>
-        <h3>Tell Us What You Need</h3>
-        <p>Reach out and describe your setup — device, messaging apps, use cases.</p>
+        <h3><span data-en>Tell Us What You Need</span><span data-zh>告诉我们你的需求</span></h3>
+        <p><span data-en>Reach out and describe your setup — device, messaging apps, use cases.</span><span data-zh>联系我们，描述你的设备、常用平台和使用场景。</span></p>
       </div>
       <div class="step">
         <div class="step-num">02</div>
-        <h3>We Plan Your Setup</h3>
-        <p>We design a configuration tailored to your workflow and preferences.</p>
+        <h3><span data-en>We Plan Your Setup</span><span data-zh>我们制定方案</span></h3>
+        <p><span data-en>We design a configuration tailored to your workflow and preferences.</span><span data-zh>根据你的工作流程和偏好，设计专属配置方案。</span></p>
       </div>
       <div class="step">
         <div class="step-num">03</div>
-        <h3>We Deploy & Configure</h3>
-        <p>Remote setup, installation, and full configuration — usually done in a day.</p>
+        <h3><span data-en>We Deploy & Configure</span><span data-zh>远程部署配置</span></h3>
+        <p><span data-en>Remote setup, installation, and full configuration — usually done in a day.</span><span data-zh>远程安装、配置，通常一天内完成。</span></p>
       </div>
       <div class="step">
         <div class="step-num">04</div>
-        <h3>You're Live</h3>
-        <p>Your AI assistant is ready. We walk you through everything and stay for questions.</p>
+        <h3><span data-en>You're Live</span><span data-zh>正式上线</span></h3>
+        <p><span data-en>Your AI assistant is ready. We walk you through everything and stay for questions.</span><span data-zh>AI 助手就绪，我们带你熟悉操作，有问题随时问。</span></p>
       </div>
     </div>
   </section>
 
   <!-- CTA BANNER -->
   <div class="cta-section">
-    <h2>Ready to get your AI assistant?</h2>
-    <p>Most setups are completed within 24 hours. Get in touch and let's make it happen.</p>
-    <a href="#contact" class="btn-primary">Contact Us Today</a>
+    <h2>
+      <span data-en>Ready to get your AI assistant?</span>
+      <span data-zh>准备好拥有你的 AI 助手了吗？</span>
+    </h2>
+    <p>
+      <span data-en>Most setups are completed within 24 hours. Get in touch and let's make it happen.</span>
+      <span data-zh>大多数部署在 24 小时内完成。联系我们，马上开始。</span>
+    </p>
+    <a href="#contact" class="btn-primary">
+      <span data-en>Contact Us Today</span>
+      <span data-zh>立即联系</span>
+    </a>
   </div>
 
   <!-- CONTACT -->
   <section id="contact">
-    <div class="section-label">Contact</div>
-    <h2 class="section-title">Get In Touch</h2>
-    <p class="section-sub">Ready to start? Have questions? We're happy to chat.</p>
+    <div class="section-label">
+      <span data-en>Contact</span><span data-zh>联系我们</span>
+    </div>
+    <h2 class="section-title">
+      <span data-en>Get In Touch</span><span data-zh>随时联系</span>
+    </h2>
+    <p class="section-sub">
+      <span data-en>Ready to start? Have questions? We're happy to chat.</span>
+      <span data-zh>想开始了？有疑问？欢迎随时联系我们。</span>
+    </p>
     <div class="contact-grid">
-      <a href="mailto:hello@tangtech.xyz" class="contact-item">
+      <a href="mailto:jun@tangtech.xyz" class="contact-item">
         <div class="contact-icon">✉️</div>
         <div>
-          <span>Email</span>
-          <strong>hello@tangtech.xyz</strong>
+          <span><span data-en>Email</span><span data-zh>邮件</span></span>
+          <strong>jun@tangtech.xyz</strong>
         </div>
       </a>
       <a href="https://github.com/jewraychen" class="contact-item" target="_blank">
@@ -409,8 +426,8 @@
       <a href="#" class="contact-item">
         <div class="contact-icon">💬</div>
         <div>
-          <span>Response Time</span>
-          <strong>Within 24 hours</strong>
+          <span><span data-en>Response Time</span><span data-zh>响应时间</span></span>
+          <strong><span data-en>Within 24 hours</span><span data-zh>24 小时内回复</span></strong>
         </div>
       </a>
     </div>
@@ -421,5 +438,27 @@
     <p>© 2026 TangTech · <a href="https://tangtech.xyz">tangtech.xyz</a> · Powered by <a href="https://openclaw.ai" target="_blank">OpenClaw</a></p>
   </footer>
 
+  <script>
+    function toggleLang() {
+      const html = document.documentElement;
+      const btn = document.getElementById('langBtn');
+      if (html.dataset.lang === 'en') {
+        html.dataset.lang = 'zh';
+        html.lang = 'zh';
+        btn.textContent = 'English';
+      } else {
+        html.dataset.lang = 'en';
+        html.lang = 'en';
+        btn.textContent = '中文';
+      }
+    }
+
+    // 根据浏览器语言自动切换
+    if (navigator.language.startsWith('zh')) {
+      document.documentElement.dataset.lang = 'zh';
+      document.documentElement.lang = 'zh';
+      document.getElementById('langBtn').textContent = 'English';
+    }
+  </script>
 </body>
 </html>
